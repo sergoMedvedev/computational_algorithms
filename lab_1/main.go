@@ -8,5 +8,9 @@ import "fmt"
 */
 
 func main() {
-	fmt.Print("hi. Sergo")
+	fmt.Print("hi. Interpolation")
+}
+
+func InterpolationNewton(x float32, mass *[][]float32, n int) {
+	
 }

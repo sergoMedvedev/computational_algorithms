@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+
+	"github.com/olebedev/when"
 )
 
 /*
@@ -64,6 +66,19 @@ func InterpolationNewton(x float64, mass [][]float64, n int) {
 		bufArray := []float64{mass[i][0], mass[i][1]}
 		desiredArray = append(desiredArray, bufArray)
 	}
+	//Реализации подсчета коэффициентов
 
-	fmt.Print(desiredArray)
+	indexСycle := n
+
+	for indexСycle != 2 {
+		j := 0 // индекс для внутреннегшо цикла
+		y := 1 //индекс для смещения по таблице вправо
+		for i := 0; i < indexСycle; i++ {
+			desiredArray[i] = append(desiredArray, (desiredArray[i][y] - desiredArray[i+1][y])/(desiredArray[i][0]-desiredArray[i+1+j][0]))
+			y+=1
+			indexСycle-=1
+			j+=1
+		} 
+	}
+
 }

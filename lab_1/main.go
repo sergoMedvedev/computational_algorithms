@@ -1,31 +1,18 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
 В данной лабораторной работе необходимо реализовать алгоритм интерполяции.
 Использовать будем полином Ньютона.
 */
 
-func main() {
-	mass := [][]float64{
-		{0.5, 0.707},
-		{0.25, 0.924},
-		{0, 1},
-		{0.25, 0.924},
-		{0.5, 0.707},
-		{0.75, 0.383},
-		{1, 0},
+func InterpolationNewton(x float64, mass [][]float64, n int) float64 {
+
+	//проверка есть ли число x в массиве
+	for index := 0; index < len(mass); index++ {
+		if mass[index][0] == x {
+			return mass[index][1]
+		}
 	}
-
-	var x float64 = 0.6
-	n := 4
-	InterpolationNewton(x, mass, n)
-}
-
-func InterpolationNewton(x float64, mass [][]float64, n int) {
 
 	// поиск интервала
 	var indexUpInterval int
@@ -39,7 +26,6 @@ func InterpolationNewton(x float64, mass [][]float64, n int) {
 			indexDownInterval = i + 1
 		}
 	}
-	print(fmt.Sprintln("Индексы двух крайних значений: %d %d", indexUpInterval, indexDownInterval))
 
 	var middle int = n / 2
 
@@ -71,15 +57,21 @@ func InterpolationNewton(x float64, mass [][]float64, n int) {
 	y := 1 //индекс для смещения по таблице вправо
 	for indexСycle != 0 {
 		for i := 0; i < indexСycle; i++ {
-			number := float64((desiredArray[i][y] - desiredArray[i+1][y]) / (desiredArray[i][0] - desiredArray[i+1+j][0]))
+			number := (desiredArray[i][y] - desiredArray[i+1][y]) / (desiredArray[i][0] - desiredArray[i+1+j][0])
 			desiredArray[i] = append(desiredArray[i], number)
 		}
 		y += 1
 		indexСycle -= 1
 		j += 1
 	}
-	for i := 0; i < len(desiredArray); i++ {
-		fmt.Println(desiredArray[i])
-	}
 
+	result := desiredArray[0][1]
+	xi := 0
+	var buff float64 = 1
+	for k := 2; k < len(desiredArray[0]); k++ {
+		buff *= x - desiredArray[xi][0]
+		result = result + buff*desiredArray[0][k]
+		xi += 1
+	}
+	return result
 }

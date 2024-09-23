@@ -22,14 +22,18 @@ func main() {
 func MultidimensionalInterpolation(x float64, y float64, nx int, ny int, mass [][]float64) float64 {
 	var resultMass [][]float64
 	for i := 0; i < len(mass); i++ {
+		resultMass = append(resultMass, make([]float64, 0))
 		var massBuff [][]float64 = make([][]float64, 0)
 		for j := 0; j < len(mass[0]); j++ {
 			var buf []float64
 			buf = append(buf, float64(j))
 			buf = append(buf, mass[i][j])
 			massBuff = append(massBuff, buf)
-			resultMass[i] = append(resultMass[i], float64(i), InterpolationNewton(x, massBuff, nx))
+			fmt.Print(massBuff, "\n")
 		}
+		resultMass[i] = append(resultMass[i], float64(i))
+		result := InterpolationNewton(x, massBuff, nx)
+		resultMass[i] = append(resultMass[i], result)
 	}
 	return InterpolationNewton(y, resultMass, ny)
 }

@@ -1,1 +1,1 @@
-package lab_3
+package main

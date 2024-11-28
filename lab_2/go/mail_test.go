@@ -6,18 +6,7 @@ import (
 	"testing"
 )
 
-var mass [][]float64 = [][]float64{
-	{0.5, 0.707},
-	{0.25, 0.924},
-	{0, 1},
-	{0.25, 0.924},
-	{0.5, 0.707},
-	{0.75, 0.383},
-	{1, 0},
-}
 
-var x float64 = 0.6
-var n int = 4
 
 func TestInterpolationNewton(t *testing.T) {
 
